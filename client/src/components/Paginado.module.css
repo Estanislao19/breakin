@@ -1,0 +1,15 @@
+.pag{
+    font-family:Arial;
+  font-weight:bold;
+  font-size:13px;
+  color:rgb(29, 230, 230);
+  background-color: darkslategrey;
+  text-decoration: none;
+  list-style: none;
+ 
+  border-radius: 50px;
+  justify-content: center;
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}

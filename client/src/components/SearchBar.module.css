@@ -1,0 +1,28 @@
+.input{
+    font-family: "Zen Antique", serif;
+  display: inline-block;
+  color: white;
+  border: 1px solid #ccc;
+  background: black;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  max-width: 150px;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: small;
+}
+
+.btn{
+    padding: 5px;
+    margin: 5px;
+    width: 100px;
+    font-size: large;
+    border-radius: 5px;
+    border: 2px solid #55868C;
+    background-color: transparent;
+    color: #55868C;
+    text-decoration: none;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
