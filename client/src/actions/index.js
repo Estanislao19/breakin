@@ -1,75 +1,109 @@
-import axios from 'axios'
+import axios from 'axios';
 
 
-export function getCharacters () {
-return async function(dispatch){
-    var json = await axios.get('/characters');
-    console.log('e',json)
-    return dispatch({
-        type:'GET_CHARACTERS',
-        payload:json.data
-    });
-};
-};
-
-export function filterCharactersByStatus(payload) {
-    return {
-        type:'FILTER_BY_STATUS',
-        payload
-    }
-}
-
-export function filterCreated(payload) {
-    return{
-        type:'FILTER_CREATED',
-        payload
-    }
-}
-export function orderByName(payload) {
-    return {
-        type:'ORDER_BY_NAME',
-        payload
-    }
-}
-export function getNameCharacters(name){
-    return async function (dispatch){
-        var json = await axios.get('/characters?name=' + name)
-        return dispatch ({
-            type:'GET_CHARACTERS',
-            payload:json.data
-        })
-    }
-}
-
-export function getOccupations () {
-    return async function (dispatch) {
-        var json =await axios.get('/occupations')
-        return dispatch({
-            type: 'GET_OCCUPATIONS',
-            payload:json.data
-        })
-    }
-}
-export function postCharacters (payload) {
-    return async function (dispatch){
-        var json = await axios.post('/character', payload)
-        return {
-            json
-        }
-    }
-}
-export function resetBeaDetail(payload) {
-    return {
-        type:'RESET_BREAKING',
-        payload
-    }
-}
-export function getDetail (id) {
+export function getcharacter() {
 return async function (dispatch){
-    var json = await axios.get('/characters/' + id);
-    return dispatch ({
-        type:'GET_DETAIL',
-        payload:json.data
-    })
+   var json = await axios.get('/characters')
+   return dispatch({
+    type:'GET_CHARACTERS',
+    payload:json.data
+   })
 }
+} 
+export function filterAlfa(payload){
+   return {
+       type:'FILTER_BY_ALFA',
+       payload
+   }
 }
+ 
+export function filterCharacters (payload) {
+   return {
+       type:'FILTER_CHARACTERS',
+       payload
+   }
+}
+export function getEpisode() {
+   return async function (dispatch){
+      var json = await axios.get('/episode')
+      return dispatch({
+       type:'GET_EPISODE',
+       payload:json.data
+      })
+   }
+   } 
+   export function filterAir (payload){
+      return{
+         type:'FILTER_AIR',
+         payload
+      }
+   }
+  
+   export function filtipo (payload){
+      return{
+         type:'FILT_TIPO',
+         payload
+      }
+   }
+   
+
+   export function filtAlive (payload){
+      return{
+         type:'FILT_ALIVE',
+         payload
+      }
+   }
+
+
+   export function filtergender (payload){
+      return{
+         type:'FILT_GENDER',
+         payload
+      }
+   }
+   export function filterLocation (payload){
+      return{
+         type:'FILTER_LOCATION',
+         payload
+      }
+   }
+
+export function getDetail(id){
+    return async function(dispatch){
+       
+            var json = await axios.get("/characters/" + id);
+            return dispatch({
+                type: 'GET_DETAIL',
+                payload: json.data
+            })
+                      
+    }
+}
+export function resetDetail (payload) {
+   return{
+       type:'RESET_DETAIL',
+       payload
+   }
+   
+   }
+   export function filterOrigin (payload){
+      return{
+         type:'FILTER_ORIGIN',
+         payload
+      }
+   }
+   export function getSearch (name){
+   
+      return function (dispatch){
+          axios.get('/characters?name=' + name)
+          .then(res=>{
+              dispatch({
+                  type:'GET_SEARCH',
+                  payload:res.data
+                  
+              })
+          }).catch(error=>
+           alert('no se encuentra el personaje que estas buscando'))
+      }
+      
+   }

@@ -1,46 +1,50 @@
 import React from "react";
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { getDetail, resetBeaDetail } from "../actions/index.js";
 import { useEffect } from "react";
-import style from './Detail.module.css'
+import { useDispatch, useSelector } from "react-redux";
+import { getDetail, resetDetail } from "../actions";
+import { useParams,useNavigate } from 'react-router';
+import style from './Detail.module.css';
 
-export default function Detail(props){
-    console.log(props)
 
-    const dispatch = useDispatch()
-    const {id} = useParams();
+export default function Detail(){
+    const dispatch = useDispatch();
+    const { id }= useParams();
+    const navigate= useNavigate();
+
     useEffect(() => {
-        dispatch(getDetail(id))
+        dispatch(getDetail(id));
         return ()=>{
-            dispatch(resetBeaDetail())
+            dispatch(resetDetail())
         }
-    },[dispatch, id] )
+    }, [dispatch, id])
+    
+    
+    const navegacion =() =>{
+      navigate("/home");
+    }
 
-    const myCharacter = useSelector(state => state.detail)
+    const perro = useSelector((state) => state.detail)
 
-    return (
-        <div className={style.div}>
+    
+
+return(
+    <div className={style.container} >
         {
-            myCharacter.length > 0 ?
-            <div>
-                <h1 className={style.soy}>Soy {myCharacter[0].name}</h1>
-                <img className={style.img} src={myCharacter[0].img ? myCharacter[0].img :  myCharacter[0].image} alt="img not found"/>
-                <h2 className={style.sta}>Status: {myCharacter[0].status}</h2>
-                <p className={style.sta}>Cumpleaños: {myCharacter[0].birthday}</p>
-                <h3 className={style.sta}>
-            Occupations: {" "}
-            {!myCharacter[0].createdAtDb
-              ? myCharacter[0].occupation + " "
-              : myCharacter[0].occupations.map((el) => el.name )}
-          </h3>
+            perro.length > 0 ?
+            <div className={style.cont} >
+                <h1 className={style.title} >{perro[0].name}</h1>
+                <img className={style.img} src={perro[0].image} alt="Img not found" />
+                <h3 className={style.wei} > Status: {perro[0].status}</h3>
+                <h3 className={style.wei}> Species: {perro[0].species} </h3>
+                <h3 className={style.wei} > Gender: {perro[0].gender} </h3>
+                <h3 className={style.wei}> Created:  {perro[0].created} </h3>
+                <h3 className={style.wei}>Location:{perro[0].location}</h3>
+                <h3 className={style.wei}>Origin:{perro[0].origin}</h3>
+                <button className={style.btn} onClick={navegacion}>HOME</button>
                 
-                
-
-            </div> : <p>Loading...</p>
+            </div> : 
+            <p>Loading... </p>
         }
-        <Link to='/home'>
-            <button className={style.btn}>Volver</button>
-        </Link>
-        </div>
-    )}
+    </div>
+)
+    }

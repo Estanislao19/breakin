@@ -5,33 +5,43 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('character', {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type:DataTypes.UUID,
+      defaultValue:DataTypes.UUIDV4,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
     },
-    name: {
+    name:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    nickname: {
+    status:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    birthday: {
+    species:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
     },
-    status: {
-      type: DataTypes.ENUM('Alive', 'Deceased', 'Presumed dead', 'Unknown')
+    gender:{
+      type: DataTypes.STRING,
+      allowNull: true,
     },
-    image: {
-      type: DataTypes.STRING
+    image:{
+      type: DataTypes.STRING,
     },
-    createInDb: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+    
+    location:{
+     type:DataTypes.STRING,
+    },
+    created:{
+      type:DataTypes.STRING,
+    },
+    type:{
+      type:DataTypes.STRING,
+    },
+    origin:{
+      type:DataTypes.STRING,
     }
   });
+  
 };

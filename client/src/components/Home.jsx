@@ -1,91 +1,218 @@
 import React from 'react';
-import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
+import { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import { filterCharactersByStatus, filterCreated, getCharacters, orderByName } from '../actions';
-import Card from './Card';
+import { filtAlive, filterAir, filterAlfa, filterCharacters, filterDogue, filtergender, filterLoca, filterLocation, filterName, filterOrigin, filtipo, getcharacter, getEpisode } from '../actions';
 import Paginado from './Paginado';
-import style from './Home.module.css'
+import Card from './Card'; 
+import style from './Home.module.css';
+import SearchBar from './SearchBar';
 
-export default function Home () {
 
-const dispatch =useDispatch();
-const allCharacters = useSelector((state)=>state.characters);
-console.log('e',allCharacters)
-const [currentPage, setCurrentPage] = useState(1)
-const [charactersPerPage, setCharactersPerPage] = useState(6)
-const indexOfLastCharacter = currentPage * charactersPerPage // 6
-const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage // 0
-const currentCharacters = allCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter)
+export default function Home (){
+    const dispatch=useDispatch();
+    const allCharacters = useSelector((state)=>state.characters) 
+    console.log('eseee',allCharacters)
+    const [orderaz,setOrderAZ] =useState('')
+    const [currentPage, setCurrentPage] = useState(1)//1ro mi pagina actual y un estado q setee mi pag actual
+    // const [countriesPerPage, setCountriesPerPage] = useState(10)//setea cant personajes x pag
+    const [characters, setcountryPerPage] = useState(12);
+    const lastCharacter = currentPage * characters//10
+    const firstCharacters = lastCharacter - characters //0
+    const currentCountries = allCharacters.slice(firstCharacters, lastCharacter)
+    const allepisode=useSelector((state)=>state.episode)
+    console.log('all',allepisode)
+     
 
-const [order,setOrder] = useState('')
-const paginado =(pageNumber)=>{
-    setCurrentPage(pageNumber);
-}
+    useEffect(()=>{
+        dispatch(getcharacter())
+        dispatch(getEpisode())
+    },[dispatch]);
 
-function handleFilterStatus (e) {
-    dispatch(filterCharactersByStatus(e.target.value))
-    setCurrentPage(1)
-}
-
-function handleFilterCreated (e) {
-    dispatch(filterCreated(e.target.value))
-    setCurrentPage(1)
-}
-
-function handleFilterOrder(e) {
-    dispatch(orderByName(e.target.value))
-    
-    setOrder(`ordenar${e.target.value}`)
-}
-
-useEffect(()=>{
-    dispatch(getCharacters());
-},[dispatch]);
-
-function handleClick (e) {
-e.preventDefault();
-dispatch(getCharacters()); // apreto y que me traiga todo de nuevo
-}
-
-return (
-    <div className={style.di} >
-        <Link to='/character' className={style.cre} >Crear personajes</Link>
-        <h1 className={style.tit}>Pagina de breaking bad</h1>
-        <button className={style.carg} onClick={e=>handleClick(e)}>
-            volver a cargar los personajes
-        </button>
-        <Paginado charactersPerPage = {charactersPerPage} allCharacters={allCharacters.length} paginado={paginado}/>
+    function handleClick (e) {
+      
+        dispatch(getcharacter());
        
-        <div>  
-            <select  className={style.sel} onChange={e=>handleFilterOrder(e)}>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
+    } 
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+    function handlefilterCharacters (e) {
+        dispatch(filterCharacters(e.target.value));
+       setCurrentPage(1)
+   }
+   let razadedog = allCharacters.map(e =>{
+    let sa = e.name.split('').join('');
+    let san = sa
+    return san
+})
+const allraza = [...new Set(razadedog)]
+
+    function handlefilterAlfa(e){
+        e.preventDefault();
+        dispatch(filterAlfa(e.target.value));
+        setOrderAZ(`Ordenado ${e.target.value}`)
+        
+        }
+        function handleFilterair_date (e){
+            dispatch(filterAir(e.target.value));
+            
+        }
+        let creados = allCharacters.map(e =>{
+            let re = e.created.split('').join('');
+            let perr = re
+            return perr
+        })
+        const allcreated = [...new Set(creados)]
+       
+        function handleAlive(e){
+            dispatch(filtAlive(e.target.value));
+            
+        }
+        let dead = allCharacters.map(e =>{
+            let estan = e.status.split('').join('');
+            let estani = estan
+            return estani
+        })
+        const alive = [...new Set(dead)]
+        
+        function handlegenre(e){
+            e.preventDefault();
+            dispatch(filtergender(e.target.value));
+            
+            }
+            let gend = allCharacters.map(e =>{
+                let mort = e.gender.split('').join('');
+                let morti = mort
+                return morti
+            })
+            const allgender = [...new Set(gend)]
+        
+     function handleori(e){
+
+        dispatch(filterOrigin(e.target.value));
+            
+    }
+    let vamos = allCharacters.map(e =>{
+        let summ = e.origin.split('').join('');
+        let summer = summ
+        return summer
+    })
+    const allorigin = [...new Set(vamos)]
+
+
+        function handletipo (e){
+            dispatch(filtipo(e.target.value));
+            
+        }
+        let loca = allCharacters.map(e =>{
+            let res = e.type.split('').join('');
+            let perr = res
+            return perr
+        })
+        const alltipos = [...new Set(loca)]
+
+        
+        function handlelocation (e){
+            dispatch(filterLocation(e.target.value));
+            
+        }
+        let locat = allCharacters.map(e =>{
+            let re = e.location.split('').join('');
+            let perr = re
+            return perr
+        })
+        const allLocation = [...new Set(locat)]
+        
+     
+    
+
+
+
+    return(
+        <div className={style.container}>
+            <h1 className={style.title} >PAGINA DE RICK AND MORTY</h1>
+            
+            <select className={style.rick}  onChange ={e => handlefilterAlfa(e)}>
+		<option value ='asc'>Ordenamiento alfebetico A-Z</option>
+		<option value ='des'>Ordenamiento alfebetico Z-A</option>
+        </select>
+       
+        <select className={style.rick} onChange={(e)=> handlefilterCharacters(e)}>
+            
+            <option value="all">Filtrado por nombre del personaje</option>
+            {allraza.map((e)=> 
+            <option name={e}>{e}</option>)}
+            
+        </select>
+        
+        <div>
+        <select className={style.rick} onChange={(e)=>handleFilterair_date (e)}>
+        <option value="all">Fecha de creacion de personajes</option>
+            {allcreated.map((e)=> 
+            <option name={e}>{e}</option>)}
+            
+            
+        </select>
+        <div>
+          <select className={style.rick} onChange={(e)=> handletipo(e)}>
+          <option value="All">Tipos de personajes</option>
+            {alltipos.map((e)=> 
+            <option name={e}>{e}</option>)}
+          </select>
+            
+                <select className={style.rick} onChange={(e)=>handleAlive(e)}>
+                <option value="all">Estado de los personajes</option>
+            {alive.map((e)=> 
+            <option name={e}>{e}</option>)}
+                </select>
+            
+        
+            <select className={style.rick} onChange={(e)=>handlegenre(e)}>
+            <option value="All">Genero de los personajes</option>
+            {allgender.map((e)=> 
+            <option name={e}>{e}</option>)}
             </select>
-            <select className={style.sel} onChange={e=>handleFilterStatus(e)} >
-                <option value="All">Todos</option>
-                <option value="Alive">Vivo</option>
-                <option value="Deceased">Muerto</option>
-                <option value="Unknown">Desconocido</option>
-                <option value="Presumed dead">Probablemente muerto</option>
-            </select>
-            <select className={style.sel} onChange={e=>handleFilterCreated(e)} >
-                <option value="All">Todos</option>
-                <option value="created">Creados</option>
-                <option value="api">Existentes</option>
-            </select>
-            <div>
-           
-           </div>
-           {currentCharacters?.map( ch => {
-                    return(
-                        <fragment>
-                            <Link to={'/home/' + ch.id} >
-                            <Card name={ch.name} image={ch.img ? ch.img : ch.image} nickname={ch.nickname} />
-                            </Link>
-                        </fragment>
-                    )
-                })}
+        </div>
+        <div>
+            
+                <select className={style.rick} onChange={(e)=>handlelocation(e)}>
+                <option value="All">Location</option>
+            {allLocation.map((e)=> 
+            <option name={e}>{e}</option>)}
+                </select>
+            
+        
+        
+        <select className={style.rick} onChange={(e)=>handleori(e)}>
+                <option value="All">Origin</option>
+            {allorigin.map((e)=> 
+            <option name={e}>{e}</option>)}
+                </select>
+        
+        <div>
+            <button className={style.carg} onClick={e=> {handleClick(e)}}>Volver a cargar los personajes</button>
+        </div>
+        <div>
+            <SearchBar/>
+        </div>
+        </div>
+        <div>
+        <Paginado
+                characters={characters}
+                allCharacters={allCharacters.length}
+                paginado={paginado}
+            />
+            {
+                    currentCountries.map(el => {
+                        return (
+                            <div key={el.id}>
+                                <Link to={"/home/" + el.id} >
+		<Card name={el.name} air_date={el.air_date} type={el.type} location={el.location} species={el.species} created={el.created} image={el.image} status={el.status} />
+		</Link>
+		</div>
+		)})}
+        </div>
             </div>
         </div>
     )

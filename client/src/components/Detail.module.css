@@ -1,5 +1,5 @@
-.div{
-    background-image: url(https://s1.1zoom.me/big0/380/Painting_Art_Breaking_487616.jpg);
+.container{
+    background-image: url(https://images.pexels.com/photos/1417651/pexels-photo-1417651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
     background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -7,40 +7,73 @@
   height: 100%;
   overflow-y: scroll;
 }
-.soy{
-    color: blanchedalmond;
-    font-family: 'Droid serif', serif; 
-    font-size: 36px; 
-    font-weight: 400; 
-    font-style: italic; 
-    line-height: 44px; 
-    margin: 10px 12px;
-    padding: 10px 12px; 
+.cont{
+    color: rgba(255, 255, 255, 0.63);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 30px;
+  text-align: center;
+  margin: 20px 0 0px;
+  line-height: 1.1em;
+  text-shadow: -2px -2px 2px #000000, 2px -2px 2px #000000, -2px 2px 2px #000000,
+    2px 2px 2px #000000;
+}
+.title{
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-size: 45px;
+  text-align: center;
+  margin: 10px;
+  margin-top: 1rem;
+ margin-bottom: 2rem;
     text-align: center;
+    color:white
+ 
 }
-.img{
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 50%;
-    opacity: 0.8;
+img{
+    border-radius: 15px;
+    height: 350px;
+    border: 3px white solid;
+    box-shadow: 6px 7px 8px -6px  rgb(255, 255, 255);
 }
-.sta{
-    
-    color: #e4fd02; 
-    font-size: 29px; 
-    font-family: "Libre Baskerville", serif; 
-    line-height: 45px; 
-    text-align: center; 
-    text-shadow: 0 1px 1px #fff; 
-    padding: 20px; 
+.wei{
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0 0px;
+    line-height: 1.1em;
+    text-shadow: -2px -2px 2px #000000, 2px -2px 2px #000000, -2px 2px 2px #000000,
+      2px 2px 2px #000000;
 }
+
+
 .btn{
-    margin-top: 5%;
-    margin-left: 7%;
-    /* background-color:  rgba(240, 228, 236, 0.712); */
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    padding: 7px;
-    background-color: rgb(56, 77, 50); 
-    color:white;
+    margin-top: 20px;
+    margin-left: 80px;
+	background:linear-gradient(to bottom, #7ED5CD 5%, #9ccec9ad 100%);
+	background-color:#7ED5CD;
+	border-radius:21px;
+    border: none;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #467772;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    
 }

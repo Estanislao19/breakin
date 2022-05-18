@@ -1,22 +1,26 @@
-import React from "react";
-import style from './Paginado.module.css';
+
+import React from 'react';
+import Style from "./Paginado.module.css"
 
 
-export default function Paginado({ charactersPerPage, allCharacters, paginado }) {
+export default function Paginado({ characters, allCharacters, paginado }) {
+    
     const pageNumbers = []
 
-    for (let i = 1; i <= Math.ceil(allCharacters / charactersPerPage); i++) {
-        pageNumbers.push(i);
+    for (let i = 1; i <= Math.ceil(allCharacters/characters); i++) {
+        pageNumbers.push(i)
+
     }
 
-    return (
-        <nav className={style.dea}>
-            <ul className='paginado'>
-                { pageNumbers && pageNumbers.map(number => (
+    return ( //ésto renderiza los numeritos del paginado
+        <nav className={Style.nav}>
+            <ul className={Style.pagina}>
+                {pageNumbers &&
+                    pageNumbers.map(number => (
                    
-                        <button className={style.pag} onClick={() => paginado(number)}>{number}</button>
-                   
-                ))}
+                            <button className={Style.num} onClick={() => paginado(number)}>{number}</button>
+                        
+                    ))}
             </ul>
         </nav>
     )
